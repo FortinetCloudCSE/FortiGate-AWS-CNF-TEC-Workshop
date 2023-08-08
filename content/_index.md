@@ -1,25 +1,20 @@
 ---
-title: "Fortinet TECWorkshop Template - MVP1"
-menuTitle: "TECWorkshop Template"
+title: "Secure AWS workloads with FortiGate CNF SaaS"
+chapter: true
 weight: 1
-archetype: home
 ---
 
-### Welcome!
+# Secure AWS workloads with FortiGate CNF SaaS
 
-This site will explain how to use the [Hugo Web Framework]("https://gohugo.io/") & the ["reLearn" Theme]("https://mcshelby.github.io/hugo-theme-relearn/index.html") to effectively organize & deliver Fortinet TEC Workshops & Product demos in a consistent, simple, and visually appealing format.
+![](./images/image-cnf-overview.png)
 
-The beauty of this framework lies in its simplicity.  Within approx 30 mins, anybody can have a site up and running.  Content is created via Markdown files, and the workshop guide layout is simply a directory structure.
 
-Follow along on this simple tutorial to get up and running with a Hugo formatted site for your TEC Workshop/training/demo content today!
+## Welcome!
 
-### Learning Objectives
-- Setup UserRepo on your system & Build container with Hugo & CentralRepo
-- Learn to work in Hugo to create your content to display proper information flow for your TEC Workshop/demo/training
-- Publish your Hugo site to GitHub pages via a CI/CD model 
- 
-### Hugo and Fortinet TECWorkshops - Visually
-- The purpose of this workflow is to simplify creation of Fortinet TECWorkshop guides while providing an example CI/CD development environment with maximum re-usability 
-- Here's a visual representation of our process which will be fully explained in each chapter
+AWS Software-Defined Networking (SDN) is elastic, complex, and quite different than traditional on-premise networking. In this workshop you will learn how to use FortiGate Cloud Native Firewall as a Service (FortiGate CNF) to protect your AWS workloads deployed in common architecture patterns.
 
-{{< FTNThugoFlow >}}
+This workshop is intended to help accomplish the following:
+
+  * Learn common AWS networking concepts such as routing traffic in and out of VPCs for various traffic flows
+  * Interact with FortiGate CNF Portal to deploy CNF instances, build security policy sets, and deploy them
+  * Test traffic flows in an example environment and use FortiGate CNF to control traffic flows
