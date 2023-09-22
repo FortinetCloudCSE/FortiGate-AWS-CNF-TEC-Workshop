@@ -40,10 +40,13 @@ vpc_cidr_west               = "192.168.1.0/24"
 vpc_cidr_west_private_az1   = "192.168.1.0/28"
 vpc_cidr_west_private_az2   = "192.168.1.16/28"
 
-fortimanager_instance_type  = "c5.xlarge"
+fortimanager_instance_type  = "m5.xlarge"
+fortianalyzer_instance_type = "m5.xlarge"
 
-fortimanager_os_version     = "7.2.2"
+fortimanager_os_version     = "7.2.3"
 fortimanager_host_ip        = 12
+fortianalyzer_os_version    = "7.2.3"
+fortianalyzer_host_ip       = 13
 #
 # Fortigate Variables
 # cidr_for_access goes into the inbound security group for the Fortigates. Current value is open. It may be wise to

@@ -67,6 +67,15 @@ variable "fortimanager_os_version" {
 variable "fortimanager_host_ip" {
   description = "Fortimanager IP Address"
 }
+variable "fortianalyzer_instance_type" {
+  description = "Instance type for fortianalyzer"
+}
+variable "fortianalyzer_os_version" {
+  description = "Fortianalyzer OS Version for the AMI Search String"
+}
+variable "fortianalyzer_host_ip" {
+  description = "Fortianalyzer IP Address"
+}
 variable "cidr_for_access" {
   description = "CIDR to use for security group access"
 }

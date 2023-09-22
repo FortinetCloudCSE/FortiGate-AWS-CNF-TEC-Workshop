@@ -5,7 +5,7 @@ weight: 1
 
 # How to Demo and Sell FortiGate CNF
 
-![](./images/image-cnf-overview.png)
+![](../images/image-cnf-overview.png)
 
 ## Welcome!
 
@@ -59,4 +59,4 @@ This is the architecture and environment that will be used in the workshop.
   * **Distributed Ingress + Egress**
   * **Centralized Egress + East-West**
 
-![](./images/image-ref-diag1.png)
+![](../images/image-ref-diag1.png)

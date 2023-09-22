@@ -17,6 +17,9 @@ locals {
 locals {
   fortimanager_ip_address = cidrhost(local.public_subnet_cidr_az1, var.fortimanager_host_ip)
 }
+locals {
+  fortianalyzer_ip_address = cidrhost(local.public_subnet_cidr_az1, var.fortianalyzer_host_ip)
+}
 
 resource "null_resource" "previous" {}
 
@@ -256,12 +259,39 @@ data "template_file" "fmgr_userdata" {
   }
 }
 
+#
+# Fortianalyzer
+#
+data "template_file" "faz_userdata" {
+  template = file("./config_templates/faz-userdata.tpl")
+
+  vars = {
+    faz_byol_license      = file("./licenses/faz-license.lic")
+  }
+}
+
 data "aws_ami" "fortimanager" {
   most_recent = true
 
   filter {
     name                         = "name"
     values                       = ["FortiManager VM64-AWS *(${var.fortimanager_os_version})*"]
+  }
+
+  filter {
+    name                         = "virtualization-type"
+    values                       = ["hvm"]
+  }
+
+  owners                         = ["679593333241"] # Canonical
+}
+
+data "aws_ami" "fortianalyzer" {
+  most_recent = true
+
+  filter {
+    name                         = "name"
+    values                       = ["FortiAnalyzer-VM64-AWS *(${var.fortianalyzer_os_version}) GA*"]
   }
 
   filter {
@@ -281,7 +311,7 @@ module "iam_profile" {
 # This is an "allow all" security group, but a place holder for a more strict SG
 #
 resource aws_security_group "fortimanager_sg" {
-  name = "allow_public_subnets"
+  name = "allow_public_subnets_fmg"
   description = "Fortimanager Allow all traffic from public Subnets"
   vpc_id = module.vpc-inspection.vpc_id
   ingress {
@@ -314,4 +344,41 @@ module "fortimanager" {
   security_group_public_id    = aws_security_group.fortimanager_sg.id
   iam_instance_profile_id     = module.iam_profile.id
   userdata_rendered           = data.template_file.fmgr_userdata.rendered
+}
+
+resource aws_security_group "fortianalyzer_sg" {
+  name = "allow_public_subnets_faz"
+  description = "Fortianalyzer Allow all traffic from public Subnets"
+  vpc_id = module.vpc-inspection.vpc_id
+  ingress {
+    from_port = 0
+    to_port = 0
+    protocol = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  egress {
+    from_port = 0
+    to_port = 0
+    protocol = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  tags = {
+    Name = "allow_public_subnets"
+  }
+}
+
+
+module "fortianalyzer" {
+  source                      = "git::https://github.com/40netse/terraform-modules.git//aws_ec2_instance"
+  aws_ec2_instance_name       = "${var.cp}-${var.env}-Fortianalyzer"
+  availability_zone           = local.availability_zone_1
+  instance_type               = var.fortianalyzer_instance_type
+  public_subnet_id            = module.subnet-inspection-public-az1.id
+  public_ip_address           = local.fortianalyzer_ip_address
+  aws_ami                     = data.aws_ami.fortianalyzer.id
+  enable_public_ips           = true
+  keypair                     = var.keypair
+  security_group_public_id    = aws_security_group.fortianalyzer_sg.id
+  iam_instance_profile_id     = module.iam_profile.id
+  userdata_rendered           = data.template_file.faz_userdata.rendered
 }

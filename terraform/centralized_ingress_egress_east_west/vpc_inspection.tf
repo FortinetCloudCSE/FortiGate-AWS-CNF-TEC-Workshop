@@ -65,11 +65,9 @@ module "vpc-igw-inspection" {
 
 
 resource "aws_eip" "nat-gateway-inspection-az1" {
-  vpc = true
 }
 
 resource "aws_eip" "nat-gateway-inspection-az2" {
-  vpc = true
 }
 
 resource "aws_nat_gateway" "vpc-inspection-az1" {
