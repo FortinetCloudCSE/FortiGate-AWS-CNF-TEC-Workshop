@@ -6,14 +6,14 @@ weight: 1
 * Log into your AWS account and navigate to the [**Console Home**](https://us-west-2.console.aws.amazon.com/console/home?region=us-west-2#).
 * Click on the AWS CloudShell icon on the console navigation bar
 
-![](../images/image-t1-1.png)
+![](image-t1-1.png)
 
 * We are going to use the Terraform Version Manager to help install Terraform
 * Clone the Terraform Version Manager repository
 
   ``` git clone https://github.com/tfutils/tfenv.git ~/.tfenv ```
 
-![](../images/image-t1-2.png)
+![](image-t1-2.png)
 
 * Make a new directory called ~/bin
 
@@ -27,7 +27,7 @@ weight: 1
 
   ``` tfenv install ```
   
-  ![](../images/image-t1-3.png)
+  ![](image-t1-3.png)
 
 * This will install the latest version of Terraform for you. Take note of the installed version of terrform. In this case, the default version is 1.5.3. 
 * To make this version the default version, use the following commmand
@@ -38,6 +38,6 @@ weight: 1
 
   ``` terraform -v ```
   
-  ![](../images/image-t1-4.png) 
+  ![](image-t1-4.png) 
 
 * This concludes this section.

@@ -11,4 +11,4 @@ In addition to the resources in the inspection vpc, two spoke VPC's will be crea
 
 The following network diagram illustrates the layout of the inspection vpc and spoke vpcs:
 
-![](../images/image-centralized-vpc.png)
+![](image-mdw-centralized-cap.png)

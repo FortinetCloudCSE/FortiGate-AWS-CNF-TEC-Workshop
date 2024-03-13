@@ -304,7 +304,7 @@ data "aws_ami" "fortianalyzer" {
 
 module "iam_profile" {
   source = "git::https://github.com/40netse/terraform-modules.git//aws_ec2_instance_iam_role"
-  iam_role_name               = "Fortimanager-iam_role"
+  iam_role_name               = "${var.cp}-${var.env}-${random_string.random.result}-fortimanager-instance-role"
 }
 
 #

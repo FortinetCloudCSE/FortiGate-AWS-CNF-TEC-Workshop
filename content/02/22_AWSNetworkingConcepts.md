@@ -17,14 +17,14 @@ An **Internet Gateway (IGW)** is a horizontally scaled, redundant, and highly av
 
 **AWS NAT Gateway (NAT GW)** is a Network Address Translation (NAT) service. You can use a NAT gateway so that instances in a private subnet can connect to services outside your VPC but external services cannot initiate a connection with those instances.
 
-![](../images/image-vpc.png)
+![](image-vpc.png)
 
 **AWS Transit Gateway (TGW)** is a highly scalable cloud router that connects your VPCs in the same region to each other, to on-premise networks, and even to the internet through one hub. With the use of multiple route tables for a single TGW, you can design hub and spoke routing for traffic inspection and enforcement of security policy across multiple VPCs.
 
-![](../images/image-tgw.png)
+![](image-tgw.png)
 
 **AWS (Gateway Load Balancer (GWLB)** is a transparent network gateway that distributes traffic (in a 3/5 tuple flow aware manner) to a fleet of virtual appliances for inspection. This is a regional load balancer that uses GWLB endpoints (GWLBe) to securely intercept data plane traffic within consumer VPCs in the same region.  
 
-![](../images/image-gwlb.png)
+![](image-gwlb.png)
 
 In this workshop we will use all these components to test FortiGate CNF in an enterprise design. 
