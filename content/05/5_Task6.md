@@ -4,8 +4,10 @@ weight: 3
 ---
 
 * In the FortiGate CNF console, navigate to CNF instances and click **New**.
+* Take note of the **Linux AZ1 Public IP** for the Workload VPC. Look for the following output in your scratch file. You will need this later.
 
 ![](image-t6-1.png)
+![](image-t6-1a.png)
 
 * Provide a name for the CNF instance, select **us-west-2** for the region for deployment, select **External Syslog** for the log type, and insert the  **Linux AZ1 Public IP** you wrote down earlier when you created the Workload VPC. Then click **OK** at the bottom. This will drop you back to the list of CNF instances while this is deployed in the background.
 

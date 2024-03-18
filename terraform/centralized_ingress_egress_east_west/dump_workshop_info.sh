@@ -2,7 +2,7 @@
 
 
 #
-# deploy the stack if it doesn't already exist
+# dump vpc id, subnet id's, gateway id, and vpc endpoint id's   for the inspection vpc
 #
 vpc_id=`aws ec2 describe-vpcs --region us-west-2 --filters Name=tag:Name,Values=tec-cnf-lab-inspection-vpc --query Vpcs[].VpcId --output text`
 echo Inspection VPC ID = $vpc_id

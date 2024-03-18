@@ -450,6 +450,13 @@ resource "aws_security_group" "ec2-sg" {
     protocol = "udp"
     cidr_blocks = [ "0.0.0.0/0" ]
   }
+  ingress {
+    description = "Allow ICMP Echo from anywhere IPv4"
+    from_port = 8
+    to_port = 0
+    protocol = "icmp"
+    cidr_blocks = [ "0.0.0.0/0" ]
+  }
   egress {
     description = "Allow egress ALL"
     from_port = 0

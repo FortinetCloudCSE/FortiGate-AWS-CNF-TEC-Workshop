@@ -37,7 +37,8 @@ RFC-1918 | ClassA, ClassB, ClassC
 
 ![](image-t8-6.png)
 
-* In FortiGate CNF you can create different types of address objects to be more flexible and granular in your rules within your policy set. Create an FQDN based address object by **clicking New, and Address**. Select FQDN for Type, then create the address object below.
+* In FortiGate CNF you can create different types of address objects to be more flexible and granular in your rules within your policy set. Create an FQDN based address object by **clicking New, and Address**. Select FQDN for Type, then create the address object below. 
+* Create an address object by **clicking New, and Address**. Select *IP Range* for Type, then create the address object below using the output of "What's My IP". When can use this Address Object to filter out the probe's that commonly come from the internet.
 
 {{% notice tip %}}
 **Note:** This can be used for internal Application, Network, and even legacy Elastic Load Balancers (ie ALB, NLB, ELB) to dynamically resolve their private IPs.
@@ -46,6 +47,7 @@ RFC-1918 | ClassA, ClassB, ClassC
 Name | Type | FQDN Value
 ---|---|---
 ipinfo.io | FQDN | ipinfo.io
+my-ip | IP Range | <whats my ip> - <whats my ip>
 
 ![](image-t8-7.png)
 
@@ -92,12 +94,14 @@ ApacheBackend | Private | Tag.Workshop-Function=ApacheServer and Tag.Environment
 
 * Now you can create the policies listed below to control all directions of traffic within the example environment. **Click New** and create the policies listed below:
 
-Name | Source | Destination | Service | Action | Log Allowed Traffic
----|---|--|---|---|---
-BlockList-Inbound | Russia | all | ALL | DENY | All Sessions
-BlockList-Outbound | all | Russia | ALL | DENY | All Sessions
-ApacheBackend-Inbound | UnitedStates | ApacheBackend | HTTP, SSH, SYSLOG | ACCEPT | All Sessions
-ICMP-Egress | RFC-1918 | UnitedStates | ALL_ICMP | ACCEPT | All Sessions
+Name | Source | Destination | Service        | Action | Log Allowed Traffic
+---|---|----------|----------------|---|---
+BlockList-Outbound | all | Russia   | ALL            | DENY | All Sessions
+BlockList-Inbound | Russia | all      | ALL            | DENY | All Sessions
+ipinfo_rule | Class A | ipinfo_fqdn | ALL            | DENY | All Sessions
+allow_my_ip | my-ip | RFC-1918 | ALL_ICMP, HTTP | ACCEPT | All Sessions
+ApacheBackend-Inbound | UnitedStates | ApacheBackend | SYSLOG, SSH    | ACCEPT | All Sessions
+ICMP-Egress | RFC-1918 | UnitedStates | ALL_ICMP       | ACCEPT | All Sessions
 
 ![](image-t8-14.png)
 
@@ -127,9 +131,42 @@ ICMP-Egress | RFC-1918 | UnitedStates | ALL_ICMP | ACCEPT | All Sessions
 ![](image-t8-19.png)
 
 * Use the arrow keys to navigate in the window (e.g. RIGHT ARROW). Read up on the lnav tool for more information.
-
+* Use "G" key to go to the end of the logs
+* 
 ![](image-t8-19a.png)
 
-* Feel free to experiment with Fortigate CNF and watch the log entries record your changes. Open some connections to the backend servers and monitor the logs.
+* Let's exercise a few of the policies and filter the logs using lnav. 
+* First, let's get another terminal window and ssh into the linux instance in AZ2. Grab the IP from your scratchpad. 
+
+![](image-t8-19b.png)
+![](image-t8-19c.png)
+
+* Verify the log entry using lnav. 
+* Below is the log entry using the Dynamic Address Object "ApacheBackend" that allows SSH into linux instances.
+
+{{% notice tip %}}
+**Note:** If you are having difficulty finding the log entry with lnav, here are a few useful lnav commands:
+* "G" to go to the end of the log
+* :filter-in srcip=10.0.5.11
+* :filter-in service="SSH"
+* Ctrl-R to reset your filters
+
+{{% /notice %}}
+
+![](image-t8-19d.png)   
+![](image-t8-19e.png) 
+
+* While we are here, let's ping ipinfo.io and test the ipinfo_rule in the policy set. 
+* FortiGate CNF used the FQDN address object "ipinfo.io" to resolve the IP address and apply the security policy.
+
+![](image-t8-19f.png) 
+![](image-t8-19g.png)
+
+* Let's try the "BlockList-Outbound" policy and ping an IP address in Russia. Try ping 109.169.203.90.
+
+![](image-t8-19h.png)
+![](image-t8-19i.png)
+
+* Feel free to experiment with Fortigate CNF and watch the log to verify correct policy enforcement. 
 
 * This concludes this section.
