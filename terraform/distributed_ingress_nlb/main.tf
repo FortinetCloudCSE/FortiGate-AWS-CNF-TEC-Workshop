@@ -451,7 +451,7 @@ resource "aws_security_group" "ec2-sg" {
     cidr_blocks = [ "0.0.0.0/0" ]
   }
   ingress {
-    description = "Allow ICMP Echo from anywhere IPv4"
+    description = "Allow ICMP Echo from anywhere IPv4 (Change this to My IP)"
     from_port = 8
     to_port = 0
     protocol = "icmp"
