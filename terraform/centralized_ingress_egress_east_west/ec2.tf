@@ -62,7 +62,7 @@ data "aws_ami" "ubuntu" {
 
   filter {
     name   = "name"
-    values = ["ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-20220609"]
+    values = ["ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-20250516"]
   }
 
   filter {
@@ -275,7 +275,7 @@ data "aws_ami" "fortimanager" {
 
   filter {
     name                         = "name"
-    values                       = ["FortiManager VM64-AWS *(${var.fortimanager_os_version})*"]
+    values                       = ["FortiManager-VM64-AWS *(${var.fortimanager_os_version})*"]
   }
 
   filter {
