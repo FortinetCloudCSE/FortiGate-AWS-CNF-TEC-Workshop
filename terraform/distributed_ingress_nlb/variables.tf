@@ -61,3 +61,15 @@ variable "linux_instance_type" {
 variable "linux_host_ip" {
   description = "Fortigate Host IP for all subnets"
 }
+variable "alb_certificate_domain_name" {
+  description = "Domain name for the acm certificate"
+  type        = string
+}
+variable "alb_certificate_endpoint_name" {
+  description = "Endpoint name for the ALB certificate"
+  type        = string
+}
+variable "myip" {
+  description = "Your IP address in CIDR notation"
+  type        = string
+}

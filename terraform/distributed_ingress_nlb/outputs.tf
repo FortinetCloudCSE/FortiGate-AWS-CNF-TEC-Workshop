@@ -30,17 +30,7 @@ output "private_subnet_id_az2" {
   value       = module.subnet-private-az2.id
   description = "The Private Subnet ID for app vpc"
 }
-output "public_nlb_id" {
-  value       = aws_lb.public_nlb_az1.id
-  description = "The NLB id"
-}
-output "public_nlb_dns_name" {
-  value       = aws_lb.public_nlb_az1.dns_name
-  description = "The DNS Name of the public NLB"
-}
-output "nlb_web_url" {
-  value = "nlb web url: http://${aws_lb.public_nlb_az1.dns_name}"
-}
+
 output "az1_web_url" {
   value = "linux az1 web url: http://${element(module.linux-instance-az1.public_eip, 0)}"
   precondition {
@@ -68,4 +58,12 @@ output "az2_ssh" {
     condition = var.enable_public_ips
     error_message = "No public ssh IP"
   }
+}
+output "acm_certificate_arn" {
+    description = "The ARN of the ACM certificate for the ALB"
+    value = aws_acm_certificate.alb_public_cert.arn
+}
+output "alb_dns_name" {
+    description = "The DNS name of the Application Load Balancer"
+    value = aws_lb.public_alb.dns_name
 }
