@@ -327,7 +327,7 @@ resource "aws_route" "inspection-fwaas-spoke-route-az1" {
   depends_on             = [module.vpc-transit-gateway-attachment-inspection.tgw_attachment_id]
   route_table_id         = module.inspection-fwaas-route-table-az1.id
   destination_cidr_block = var.vpc_cidr_spoke
-  transit_gateway_id         = module.vpc-transit-gateway.tgw_id
+  transit_gateway_id     = module.vpc-transit-gateway.tgw_id
 }
 resource "aws_route" "inspection-fwaas-spoke-route-az2" {
   depends_on             = [module.vpc-transit-gateway-attachment-inspection.tgw_attachment_id]
@@ -354,13 +354,13 @@ resource "aws_route" "inspection-private-spoke-route-az1" {
   depends_on             = [module.vpc-transit-gateway-attachment-inspection.tgw_attachment_id]
   route_table_id         = module.inspection-private-route-table-az1.id
   destination_cidr_block = var.vpc_cidr_spoke
-  transit_gateway_id         = module.vpc-transit-gateway.tgw_id
+  transit_gateway_id     = module.vpc-transit-gateway.tgw_id
 }
 resource "aws_route" "inspection-private-spoke-route-az2" {
   depends_on             = [module.vpc-transit-gateway-attachment-inspection.tgw_attachment_id]
   route_table_id         = module.inspection-private-route-table-az2.id
   destination_cidr_block = var.vpc_cidr_spoke
-  transit_gateway_id         = module.vpc-transit-gateway.tgw_id
+  transit_gateway_id     = module.vpc-transit-gateway.tgw_id
 }
 
 

@@ -125,7 +125,7 @@ resource "aws_lb_listener" "alb_https" {
 
 resource "aws_route53_record" "linux_east_az1" {
   zone_id = data.aws_route53_zone.alb_zone.zone_id
-  name    = "linux-east-az1.${var.alb_certificate_domain_name}"
+  name    = "apache-az1.${var.alb_certificate_domain_name}"
   type    = "A"
   ttl     = 300
   records = [element(module.linux-instance-az1.public_eip, 0)]
@@ -133,7 +133,7 @@ resource "aws_route53_record" "linux_east_az1" {
 
 resource "aws_route53_record" "linux_east_az2" {
   zone_id = data.aws_route53_zone.alb_zone.zone_id
-  name    = "linux-east-az2.${var.alb_certificate_domain_name}"
+  name    = "apache-az2.${var.alb_certificate_domain_name}"
   type    = "A"
   ttl     = 300
   records = [element(module.linux-instance-az2.public_eip, 0)]
