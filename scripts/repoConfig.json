@@ -1,7 +1,7 @@
 {
     "repoName": "FortiGate-AWS-CNF-TEC-Workshop",
     "author": "Jeff Kopko",
-    "workshopTitle": "Hugo for Fortinet TECWorkshops",
+    "workshopTitle": "Secure AWS workloads with FortiGate CNF SaaS",
     "themeVariant": "Workshop",
     "logoBannerText": "",
     "logoBannerSubText": "How to Demo FortiGate Cloud Native Firewall on AWS",
